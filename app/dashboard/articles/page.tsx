@@ -19,12 +19,11 @@ import { Input } from "@/components/ui/input"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent } from "@/components/ui/card"
-import art1 from "@/assets/art1.jpg";
-import art2 from "@/assets/art2.jpg";
-import art3 from "@/assets/art3.jpg";
-import art4 from "@/assets/art4.jpg";
-import art5 from "@/assets/art5.jpg";
-import art6 from "@/assets/art6.jpg";
+import art1 from "@/assets/art1.jpg"
+import art2 from "@/assets/art2.jpg"
+import art3 from "@/assets/art3.jpg"
+import art4 from "@/assets/art4.jpg"
+import art5 from "@/assets/art5.jpg"
 
 // Sample article data
 const articles = [
@@ -149,20 +148,20 @@ export default function ArticlesPage() {
   }
 
   return (
-    <div className="h-full flex flex-col p-6 overflow-auto animate-fade-in">
+    <div className="h-full flex flex-col p-4 sm:p-6 overflow-auto animate-fade-in">
       {/* Header Section */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 gap-4 animate-slide-up">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 sm:mb-8 gap-4 animate-slide-up">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">Manajemen Artikel</h1>
-          <p className="text-base text-gray-600 mt-1">Kelola dan pantau semua artikel blog Anda</p>
+          <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Manajemen Artikel</h1>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">Kelola dan pantau semua artikel blog Anda</p>
         </div>
-        <Button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 text-base font-medium rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
-          <Plus className="mr-2 h-5 w-5" /> Tulis Artikel
+        <Button className="bg-pink-600 hover:bg-pink-700 text-white px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-medium rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+          <Plus className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> Tulis Artikel
         </Button>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4 mb-6 sm:mb-8">
         {[
           {
             title: "Total Artikel",
@@ -201,14 +200,14 @@ export default function ArticlesPage() {
               animationFillMode: "forwards",
             }}
           >
-            <CardContent className="p-6">
+            <CardContent className="p-4 sm:p-6">
               <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-base font-medium text-gray-600 mb-2">{stat.title}</p>
-                  <p className="text-2xl lg:text-3xl font-bold text-gray-900">{stat.value}</p>
+                <div className="min-w-0 flex-1">
+                  <p className="text-xs sm:text-sm font-medium text-gray-600 mb-1 sm:mb-2 truncate">{stat.title}</p>
+                  <p className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">{stat.value}</p>
                 </div>
                 <div
-                  className={`h-12 w-12 sm:h-14 sm:w-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 ${
+                  className={`h-8 w-8 sm:h-10 sm:w-10 lg:h-12 lg:w-12 rounded-full flex items-center justify-center flex-shrink-0 ml-2 transition-all duration-300 hover:scale-110 ${
                     stat.color === "blue"
                       ? "bg-blue-100 text-blue-600"
                       : stat.color === "green"
@@ -218,7 +217,7 @@ export default function ArticlesPage() {
                           : "bg-purple-100 text-purple-600"
                   }`}
                 >
-                  <stat.icon className="h-6 w-6 sm:h-7 sm:w-7" />
+                  <stat.icon className="h-4 w-4 sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
                 </div>
               </div>
             </CardContent>
@@ -232,38 +231,38 @@ export default function ArticlesPage() {
         style={{ animationDelay: "0.4s" }}
       >
         {/* Card Header */}
-        <div className="p-6 border-b border-gray-100 flex-shrink-0">
+        <div className="p-4 sm:p-6 border-b border-gray-100 flex-shrink-0">
           <div className="mb-4">
-            <h2 className="text-xl font-bold text-gray-900">Daftar Artikel</h2>
-            <p className="text-base text-gray-600 mt-1">Kelola semua artikel blog Anda</p>
+            <h2 className="text-base sm:text-lg lg:text-xl font-bold text-gray-900">Daftar Artikel</h2>
+            <p className="text-xs sm:text-sm text-gray-600 mt-1">Kelola semua artikel blog Anda</p>
           </div>
 
           {/* Filters */}
-          <div className="flex flex-col lg:flex-row gap-4">
+          <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
               <Input
                 type="search"
                 placeholder="Cari artikel berdasarkan judul..."
-                className="pl-10 pr-4 py-3 text-base border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"
+                className="pl-9 pr-4 py-2 sm:py-3 text-xs sm:text-sm border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
-            <div className="flex gap-3">
+            <div className="flex gap-2 sm:gap-3">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
-                    className="gap-2 px-4 py-3 text-base border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+                    className="gap-2 px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105"
                   >
-                    <Filter className="h-5 w-5" /> Kategori
+                    <Filter className="h-3 w-3 sm:h-4 sm:w-4" /> Kategori
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-48">
                   <DropdownMenuItem
                     onClick={() => setSelectedCategory(null)}
-                    className="text-base hover:bg-pink-50 hover:text-pink-600"
+                    className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600"
                   >
                     Semua Kategori
                   </DropdownMenuItem>
@@ -271,7 +270,7 @@ export default function ArticlesPage() {
                     <DropdownMenuItem
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className="text-base hover:bg-pink-50 hover:text-pink-600"
+                      className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600"
                     >
                       {category}
                     </DropdownMenuItem>
@@ -282,27 +281,27 @@ export default function ArticlesPage() {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
-                    className="gap-2 px-4 py-3 text-base border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+                    className="gap-2 px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105"
                   >
-                    <Filter className="h-5 w-5" /> Status
+                    <Filter className="h-3 w-3 sm:h-4 sm:w-4" /> Status
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-48">
                   <DropdownMenuItem
                     onClick={() => setSelectedStatus(null)}
-                    className="text-base hover:bg-pink-50 hover:text-pink-600"
+                    className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600"
                   >
                     Semua Status
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => setSelectedStatus("Dipublikasikan")}
-                    className="text-base hover:bg-pink-50 hover:text-pink-600"
+                    className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600"
                   >
                     Dipublikasikan
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => setSelectedStatus("Draft")}
-                    className="text-base hover:bg-pink-50 hover:text-pink-600"
+                    className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600"
                   >
                     Draft
                   </DropdownMenuItem>
@@ -318,13 +317,21 @@ export default function ArticlesPage() {
             <table className="w-full">
               <thead className="sticky top-0 bg-gray-50 z-10">
                 <tr className="text-left">
-                  <th className="p-4 font-semibold text-base text-gray-700">Artikel</th>
-                  <th className="p-4 font-semibold text-base text-gray-700">Kategori</th>
-                  <th className="p-4 font-semibold text-base text-gray-700">Penulis</th>
-                  <th className="p-4 font-semibold text-base text-gray-700">Tanggal</th>
-                  <th className="p-4 font-semibold text-base text-gray-700">Status</th>
-                  <th className="p-4 font-semibold text-base text-gray-700">Views</th>
-                  <th className="p-4 font-semibold text-base text-gray-700 text-right">Aksi</th>
+                  <th className="p-3 sm:p-4 font-semibold text-xs sm:text-sm text-gray-700">Artikel</th>
+                  <th className="p-3 sm:p-4 font-semibold text-xs sm:text-sm text-gray-700 hidden sm:table-cell">
+                    Kategori
+                  </th>
+                  <th className="p-3 sm:p-4 font-semibold text-xs sm:text-sm text-gray-700 hidden md:table-cell">
+                    Penulis
+                  </th>
+                  <th className="p-3 sm:p-4 font-semibold text-xs sm:text-sm text-gray-700 hidden lg:table-cell">
+                    Tanggal
+                  </th>
+                  <th className="p-3 sm:p-4 font-semibold text-xs sm:text-sm text-gray-700">Status</th>
+                  <th className="p-3 sm:p-4 font-semibold text-xs sm:text-sm text-gray-700 hidden sm:table-cell">
+                    Views
+                  </th>
+                  <th className="p-3 sm:p-4 font-semibold text-xs sm:text-sm text-gray-700 text-right">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -337,9 +344,9 @@ export default function ArticlesPage() {
                       animationFillMode: "forwards",
                     }}
                   >
-                    <td className="p-4">
+                    <td className="p-3 sm:p-4">
                       <div className="flex items-center">
-                        <div className="relative h-16 w-24 flex-shrink-0 group">
+                        <div className="relative h-12 w-16 sm:h-14 sm:w-20 lg:h-16 lg:w-24 flex-shrink-0 group">
                           <Image
                             src={article.image || "/placeholder.svg"}
                             alt={article.title}
@@ -347,58 +354,72 @@ export default function ArticlesPage() {
                             className="object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
                           />
                         </div>
-                        <div className="ml-4 min-w-0 flex-1">
-                          <p className="text-base font-semibold text-gray-900 group-hover:text-pink-600 transition-colors duration-300 line-clamp-2">
+                        <div className="ml-3 sm:ml-4 min-w-0 flex-1">
+                          <p className="text-xs sm:text-sm lg:text-base font-semibold text-gray-900 group-hover:text-pink-600 transition-colors duration-300 line-clamp-2 leading-tight">
                             {article.title}
                           </p>
-                          <p className="text-sm text-gray-500 line-clamp-1 mt-1">{article.excerpt}</p>
+                          <p className="text-xs text-gray-500 line-clamp-1 mt-1 hidden sm:block">{article.excerpt}</p>
+                          {/* Mobile: Show category and author inline */}
+                          <div className="flex items-center gap-2 mt-1 sm:hidden">
+                            <Badge
+                              variant="secondary"
+                              className="px-2 py-0.5 text-xs font-medium bg-gray-100 text-gray-800"
+                            >
+                              {article.category}
+                            </Badge>
+                            <span className="text-xs text-gray-500">• {article.author}</span>
+                          </div>
                         </div>
                       </div>
                     </td>
-                    <td className="p-4">
+                    <td className="p-3 sm:p-4 hidden sm:table-cell">
                       <Badge
                         variant="secondary"
-                        className="px-3 py-1.5 text-sm font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors duration-300"
+                        className="px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium bg-gray-100 text-gray-800 hover:bg-gray-200 transition-colors duration-300"
                       >
                         {article.category}
                       </Badge>
                     </td>
-                    <td className="p-4 text-base text-gray-700">{article.author}</td>
-                    <td className="p-4 text-base text-gray-700">{article.date}</td>
-                    <td className="p-4">
+                    <td className="p-3 sm:p-4 text-xs sm:text-sm text-gray-700 hidden md:table-cell">
+                      {article.author}
+                    </td>
+                    <td className="p-3 sm:p-4 text-xs sm:text-sm text-gray-700 hidden lg:table-cell">{article.date}</td>
+                    <td className="p-3 sm:p-4">
                       <Badge
-                        className={`px-3 py-1.5 text-sm font-medium rounded-full transition-all duration-300 ${getStatusBadge(
+                        className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium rounded-full transition-all duration-300 ${getStatusBadge(
                           article.status,
                         )}`}
                       >
                         {article.status}
                       </Badge>
                     </td>
-                    <td className="p-4">
-                      <div className="text-base font-bold text-gray-900">{article.views.toLocaleString()}</div>
-                      <div className="text-sm text-gray-500 mt-1">views</div>
+                    <td className="p-3 sm:p-4 hidden sm:table-cell">
+                      <div className="text-xs sm:text-sm lg:text-base font-bold text-gray-900">
+                        {article.views.toLocaleString()}
+                      </div>
+                      <div className="text-xs text-gray-500 mt-1">views</div>
                     </td>
-                    <td className="p-4 text-right">
+                    <td className="p-3 sm:p-4 text-right">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-10 w-10 hover:bg-gray-100 transition-all duration-300 hover:scale-110"
+                            className="h-8 w-8 sm:h-10 sm:w-10 hover:bg-gray-100 transition-all duration-300 hover:scale-110"
                           >
-                            <MoreHorizontal className="h-5 w-5" />
+                            <MoreHorizontal className="h-4 w-4" />
                             <span className="sr-only">Aksi</span>
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-48">
-                          <DropdownMenuItem className="text-base hover:bg-pink-50 hover:text-pink-600">
-                            <Eye className="mr-2 h-4 w-4" /> Lihat Artikel
+                          <DropdownMenuItem className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600">
+                            <Eye className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> Lihat Artikel
                           </DropdownMenuItem>
-                          <DropdownMenuItem className="text-base hover:bg-pink-50 hover:text-pink-600">
-                            <Edit className="mr-2 h-4 w-4" /> Edit Artikel
+                          <DropdownMenuItem className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600">
+                            <Edit className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> Edit Artikel
                           </DropdownMenuItem>
-                          <DropdownMenuItem className="text-base text-red-600 hover:bg-red-50">
-                            <Trash2 className="mr-2 h-4 w-4" /> Hapus Artikel
+                          <DropdownMenuItem className="text-xs sm:text-sm text-red-600 hover:bg-red-50">
+                            <Trash2 className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> Hapus Artikel
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
@@ -410,31 +431,40 @@ export default function ArticlesPage() {
           </div>
 
           {/* Pagination - Sticky at bottom */}
-          <div className="p-6 border-t border-gray-100 bg-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 flex-shrink-0">
-            <div className="text-base text-gray-500">
+          <div className="p-4 sm:p-6 border-t border-gray-100 bg-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 flex-shrink-0">
+            <div className="text-xs sm:text-sm text-gray-500">
               Menampilkan {filteredArticles.length} dari {articles.length} artikel
             </div>
             <div className="flex items-center justify-center sm:justify-end space-x-2">
-              <Button variant="outline" size="icon" disabled className="h-10 w-10 border-gray-300 hover:bg-gray-50">
-                <ChevronLeft className="h-5 w-5" />
+              <Button
+                variant="outline"
+                size="icon"
+                disabled
+                className="h-8 w-8 sm:h-10 sm:w-10 border-gray-300 hover:bg-gray-50"
+              >
+                <ChevronLeft className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span className="sr-only">Halaman sebelumnya</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                className="bg-pink-50 text-pink-600 border-pink-200 hover:bg-pink-100 px-4 py-2 text-base"
+                className="bg-pink-50 text-pink-600 border-pink-200 hover:bg-pink-100 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm"
               >
                 1
               </Button>
-              <Button variant="outline" size="sm" className="border-gray-300 hover:bg-gray-50 px-4 py-2 text-base">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-gray-300 hover:bg-gray-50 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm"
+              >
                 2
               </Button>
               <Button
                 variant="outline"
                 size="icon"
-                className="h-10 w-10 border-gray-300 hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+                className="h-8 w-8 sm:h-10 sm:w-10 border-gray-300 hover:bg-gray-50 transition-all duration-300 hover:scale-105"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-3 w-3 sm:h-4 sm:w-4" />
                 <span className="sr-only">Halaman berikutnya</span>
               </Button>
             </div>

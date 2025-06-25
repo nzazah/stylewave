@@ -1,14 +1,42 @@
 "use client"
 
 import { useState } from "react"
-import { Search, Filter, MoreHorizontal, ChevronLeft, ChevronRight, Eye, Download, Calendar, Mail } from "lucide-react"
+import {
+  Search,
+  Filter,
+  MoreHorizontal,
+  ChevronLeft,
+  ChevronRight,
+  Eye,
+  Download,
+  Calendar,
+  Mail,
+  Trash2,
+  AlertTriangle,
+} from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+  DropdownMenuSeparator,
+} from "@/components/ui/dropdown-menu"
 import { Badge } from "@/components/ui/badge"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 
 // Sample order data
-const orders = [
+const initialOrders = [
   {
     id: "ORD12345678",
     customer: "Budi Santoso",
@@ -112,8 +140,11 @@ const orders = [
 ]
 
 export default function OrdersPage() {
+  const [orders, setOrders] = useState(initialOrders)
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedStatus, setSelectedStatus] = useState<string | null>(null)
+  const [deleteOrderId, setDeleteOrderId] = useState<string | null>(null)
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false)
 
   // Format price to IDR
   const formatPrice = (price: number) => {
@@ -151,16 +182,35 @@ export default function OrdersPage() {
     }
   }
 
+  // Handle delete order
+  const handleDeleteOrder = (orderId: string) => {
+    setDeleteOrderId(orderId)
+    setIsDeleteDialogOpen(true)
+  }
+
+  const confirmDeleteOrder = () => {
+    if (deleteOrderId) {
+      setOrders(orders.filter((order) => order.id !== deleteOrderId))
+      setDeleteOrderId(null)
+      setIsDeleteDialogOpen(false)
+    }
+  }
+
+  const cancelDeleteOrder = () => {
+    setDeleteOrderId(null)
+    setIsDeleteDialogOpen(false)
+  }
+
   return (
-    <div className="h-full flex flex-col p-6 overflow-auto animate-fade-in">
+    <div className="h-full flex flex-col p-4 sm:p-6 overflow-auto animate-fade-in">
       {/* Header Section */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 gap-4 animate-slide-up">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 sm:mb-8 gap-4 animate-slide-up">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">Manajemen Pesanan</h1>
-          <p className="text-base text-gray-600 mt-1">Kelola dan pantau semua pesanan pelanggan</p>
+          <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Manajemen Pesanan</h1>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">Kelola dan pantau semua pesanan pelanggan</p>
         </div>
-        <Button className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-3 text-base font-medium rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
-          <Download className="mr-2 h-5 w-5" /> Ekspor Data
+        <Button className="bg-pink-600 hover:bg-pink-700 text-white px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm font-medium rounded-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+          <Download className="mr-2 h-3 w-3 sm:h-4 w-4" /> Ekspor Data
         </Button>
       </div>
 
@@ -170,14 +220,14 @@ export default function OrdersPage() {
         style={{ animationDelay: "0.2s" }}
       >
         {/* Filters */}
-        <div className="p-6 border-b border-gray-100 flex-shrink-0">
+        <div className="p-4 sm:p-6 border-b border-gray-100 flex-shrink-0">
           <div className="flex flex-col lg:flex-row gap-4">
             <div className="relative flex-1">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-3 w-3 sm:h-4 w-4 text-gray-400" />
               <Input
                 type="search"
                 placeholder="Cari berdasarkan ID pesanan, nama pelanggan, atau email..."
-                className="pl-10 pr-4 py-3 text-base border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"
+                className="pl-8 sm:pl-10 pr-4 py-2 sm:py-3 text-xs sm:text-sm border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -187,39 +237,39 @@ export default function OrdersPage() {
                 <DropdownMenuTrigger asChild>
                   <Button
                     variant="outline"
-                    className="gap-2 px-4 py-3 text-base border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+                    className="gap-2 px-3 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105"
                   >
-                    <Filter className="h-5 w-5" /> Status
+                    <Filter className="h-3 w-3 sm:h-4 w-4" /> Status
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-48">
                   <DropdownMenuItem
                     onClick={() => setSelectedStatus(null)}
-                    className="text-base hover:bg-pink-50 hover:text-pink-600"
+                    className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600"
                   >
                     Semua Status
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => setSelectedStatus("Diproses")}
-                    className="text-base hover:bg-pink-50 hover:text-pink-600"
+                    className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600"
                   >
                     Diproses
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => setSelectedStatus("Dalam Pengiriman")}
-                    className="text-base hover:bg-pink-50 hover:text-pink-600"
+                    className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600"
                   >
                     Dalam Pengiriman
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => setSelectedStatus("Selesai")}
-                    className="text-base hover:bg-pink-50 hover:text-pink-600"
+                    className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600"
                   >
                     Selesai
                   </DropdownMenuItem>
                   <DropdownMenuItem
                     onClick={() => setSelectedStatus("Dibatalkan")}
-                    className="text-base hover:bg-pink-50 hover:text-pink-600"
+                    className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600"
                   >
                     Dibatalkan
                   </DropdownMenuItem>
@@ -235,13 +285,19 @@ export default function OrdersPage() {
             <table className="w-full">
               <thead className="sticky top-0 bg-gray-50 z-10">
                 <tr className="text-left">
-                  <th className="p-4 font-semibold text-base text-gray-700">ID Pesanan</th>
-                  <th className="p-4 font-semibold text-base text-gray-700">Pelanggan</th>
-                  <th className="p-4 font-semibold text-base text-gray-700">Tanggal</th>
-                  <th className="p-4 font-semibold text-base text-gray-700">Total</th>
-                  <th className="p-4 font-semibold text-base text-gray-700">Status</th>
-                  <th className="p-4 font-semibold text-base text-gray-700">Pembayaran</th>
-                  <th className="p-4 font-semibold text-base text-gray-700 text-right">Aksi</th>
+                  <th className="p-2 sm:p-4 font-semibold text-xs sm:text-sm lg:text-base text-gray-700">ID Pesanan</th>
+                  <th className="p-2 sm:p-4 font-semibold text-xs sm:text-sm lg:text-base text-gray-700">Pelanggan</th>
+                  <th className="p-2 sm:p-4 font-semibold text-xs sm:text-sm lg:text-base text-gray-700 hidden sm:table-cell">
+                    Tanggal
+                  </th>
+                  <th className="p-2 sm:p-4 font-semibold text-xs sm:text-sm lg:text-base text-gray-700">Total</th>
+                  <th className="p-2 sm:p-4 font-semibold text-xs sm:text-sm lg:text-base text-gray-700">Status</th>
+                  <th className="p-2 sm:p-4 font-semibold text-xs sm:text-sm lg:text-base text-gray-700 hidden lg:table-cell">
+                    Pembayaran
+                  </th>
+                  <th className="p-2 sm:p-4 font-semibold text-xs sm:text-sm lg:text-base text-gray-700 text-right">
+                    Aksi
+                  </th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-100">
@@ -254,56 +310,69 @@ export default function OrdersPage() {
                       animationFillMode: "forwards",
                     }}
                   >
-                    <td className="p-4">
-                      <div className="text-base font-semibold text-gray-900 group-hover:text-pink-600 transition-colors duration-300">
+                    <td className="p-2 sm:p-4">
+                      <div className="text-xs sm:text-sm lg:text-base font-semibold text-gray-900 group-hover:text-pink-600 transition-colors duration-300">
                         {order.id}
                       </div>
-                      <div className="text-sm text-gray-500 mt-1">{order.items} item</div>
+                      <div className="text-xs text-gray-500 mt-1">{order.items} item</div>
                     </td>
-                    <td className="p-4">
-                      <div className="text-base font-medium text-gray-900">{order.customer}</div>
-                      <div className="flex items-center text-sm text-gray-600 mt-1">
-                        <Mail className="h-3 w-3 mr-1" />
+                    <td className="p-2 sm:p-4">
+                      <div className="text-xs sm:text-sm lg:text-base font-medium text-gray-900 min-w-0">
+                        <div className="truncate">{order.customer}</div>
+                      </div>
+                      <div className="flex items-center text-xs text-gray-600 mt-1 min-w-0">
+                        <Mail className="h-2 w-2 sm:h-3 w-3 mr-1 flex-shrink-0" />
                         <span className="truncate">{order.email}</span>
                       </div>
                     </td>
-                    <td className="p-4">
-                      <div className="flex items-center text-base text-gray-700">
-                        <Calendar className="h-4 w-4 mr-2 text-gray-400" />
-                        {order.date}
+                    <td className="p-2 sm:p-4 hidden sm:table-cell">
+                      <div className="flex items-center text-xs sm:text-sm lg:text-base text-gray-700">
+                        <Calendar className="h-3 w-3 sm:h-4 w-4 mr-2 text-gray-400 flex-shrink-0" />
+                        <span className="whitespace-nowrap">{order.date}</span>
                       </div>
                     </td>
-                    <td className="p-4">
-                      <div className="text-base font-bold text-gray-900">{formatPrice(order.total)}</div>
+                    <td className="p-2 sm:p-4">
+                      <div className="text-xs sm:text-sm lg:text-base font-bold text-gray-900 whitespace-nowrap">
+                        {formatPrice(order.total)}
+                      </div>
                     </td>
-                    <td className="p-4">
+                    <td className="p-2 sm:p-4">
                       <Badge
-                        className={`px-3 py-1.5 text-sm font-medium rounded-full transition-all duration-300 ${getStatusBadge(
+                        className={`px-2 sm:px-3 py-1 sm:py-1.5 text-xs font-medium rounded-full transition-all duration-300 ${getStatusBadge(
                           order.status,
                         )}`}
                       >
                         {order.status}
                       </Badge>
                     </td>
-                    <td className="p-4 text-base text-gray-700">{order.payment}</td>
-                    <td className="p-4 text-right">
+                    <td className="p-2 sm:p-4 text-xs sm:text-sm lg:text-base text-gray-700 hidden lg:table-cell">
+                      {order.payment}
+                    </td>
+                    <td className="p-2 sm:p-4 text-right">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button
                             variant="ghost"
                             size="icon"
-                            className="h-10 w-10 hover:bg-gray-100 transition-all duration-300 hover:scale-110"
+                            className="h-8 w-8 sm:h-10 w-10 hover:bg-gray-100 transition-all duration-300 hover:scale-110"
                           >
-                            <MoreHorizontal className="h-5 w-5" />
+                            <MoreHorizontal className="h-3 w-3 sm:h-4 w-4" />
                             <span className="sr-only">Aksi</span>
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end" className="w-48">
-                          <DropdownMenuItem className="text-base hover:bg-pink-50 hover:text-pink-600">
-                            <Eye className="mr-2 h-4 w-4" /> Lihat Detail
+                          <DropdownMenuItem className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600">
+                            <Eye className="mr-2 h-3 w-3 sm:h-4 w-4" /> Lihat Detail
                           </DropdownMenuItem>
-                          <DropdownMenuItem className="text-base hover:bg-pink-50 hover:text-pink-600">
-                            <Download className="mr-2 h-4 w-4" /> Unduh Invoice
+                          <DropdownMenuItem className="text-xs sm:text-sm hover:bg-pink-50 hover:text-pink-600">
+                            <Download className="mr-2 h-3 w-3 sm:h-4 w-4" /> Unduh Invoice
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem
+                            className="text-xs sm:text-sm text-red-600 hover:bg-red-50 hover:text-red-700"
+                            onClick={() => handleDeleteOrder(order.id)}
+                          >
+                            <Trash2 className="mr-2 h-3 w-3 sm:h-4 w-4" /> Hapus Pesanan
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
@@ -315,37 +384,71 @@ export default function OrdersPage() {
           </div>
 
           {/* Pagination - Sticky at bottom */}
-          <div className="p-6 border-t border-gray-100 bg-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 flex-shrink-0">
-            <div className="text-base text-gray-500">
+          <div className="p-4 sm:p-6 border-t border-gray-100 bg-white flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 flex-shrink-0">
+            <div className="text-xs sm:text-sm text-gray-500">
               Menampilkan {filteredOrders.length} dari {orders.length} pesanan
             </div>
             <div className="flex items-center justify-center sm:justify-end space-x-2">
-              <Button variant="outline" size="icon" disabled className="h-10 w-10 border-gray-300 hover:bg-gray-50">
-                <ChevronLeft className="h-5 w-5" />
+              <Button
+                variant="outline"
+                size="icon"
+                disabled
+                className="h-8 w-8 sm:h-10 w-10 border-gray-300 hover:bg-gray-50"
+              >
+                <ChevronLeft className="h-3 w-3 sm:h-4 w-4" />
                 <span className="sr-only">Halaman sebelumnya</span>
               </Button>
               <Button
                 variant="outline"
                 size="sm"
-                className="bg-pink-50 text-pink-600 border-pink-200 hover:bg-pink-100 px-4 py-2 text-base"
+                className="bg-pink-50 text-pink-600 border-pink-200 hover:bg-pink-100 px-3 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm"
               >
                 1
               </Button>
-              <Button variant="outline" size="sm" className="border-gray-300 hover:bg-gray-50 px-4 py-2 text-base">
+              <Button
+                variant="outline"
+                size="sm"
+                className="border-gray-300 hover:bg-gray-50 px-3 sm:px-4 py-1 sm:py-2 text-xs sm:text-sm"
+              >
                 2
               </Button>
               <Button
                 variant="outline"
                 size="icon"
-                className="h-10 w-10 border-gray-300 hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+                className="h-8 w-8 sm:h-10 w-10 border-gray-300 hover:bg-gray-50 transition-all duration-300 hover:scale-105"
               >
-                <ChevronRight className="h-5 w-5" />
+                <ChevronRight className="h-3 w-3 sm:h-4 w-4" />
                 <span className="sr-only">Halaman berikutnya</span>
               </Button>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={isDeleteDialogOpen} onOpenChange={setIsDeleteDialogOpen}>
+        <AlertDialogContent className="sm:max-w-md">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center gap-2 text-base sm:text-lg">
+              <AlertTriangle className="h-4 w-4 sm:h-5 w-5 text-red-500" />
+              Konfirmasi Hapus Pesanan
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-xs sm:text-sm">
+              Apakah Anda yakin ingin menghapus pesanan <strong>{deleteOrderId}</strong>? Tindakan ini tidak dapat
+              dibatalkan dan akan menghapus semua data pesanan secara permanen.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter className="flex-col sm:flex-row gap-2">
+            <AlertDialogCancel onClick={cancelDeleteOrder} className="text-xs sm:text-sm">
+              Batal
+            </AlertDialogCancel>
+            <AlertDialogAction onClick={confirmDeleteOrder} className="bg-red-600 hover:bg-red-700 text-xs sm:text-sm">
+              <Trash2 className="mr-2 h-3 w-3 sm:h-4 w-4" />
+              Hapus Pesanan
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

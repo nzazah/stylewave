@@ -4,9 +4,9 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Minus, Plus, X, CreditCard, ArrowLeft } from "lucide-react"
-import main2 from "@/assets/main2.jpg";
-import main1 from "@/assets/main1.jpg";
-import main3 from "@/assets/main3.jpg";
+import main2 from "@/assets/main2.jpg"
+import main1 from "@/assets/main1.jpg"
+import main3 from "@/assets/main3.jpg"
 
 // Sample cart items
 const cartItems = [
@@ -81,134 +81,256 @@ export default function CartPage() {
   }
 
   if (!mounted) {
-    return <div className="py-12 container mx-auto px-4">Memuat keranjang...</div>
+    return (
+      <div className="py-8 sm:py-12">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600 mx-auto mb-4"></div>
+            <p className="text-sm text-gray-600">Memuat keranjang...</p>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   return (
-    <div className="py-12">
-      <div className="container mx-auto px-4">
-        <h1 className="text-3xl font-bold mb-8">Keranjang Belanja Anda</h1>
+    <div className="min-h-screen bg-gray-50 py-6 sm:py-8 lg:py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Breadcrumb */}
+        <nav className="mb-4 sm:mb-6 text-sm">
+          <ol className="flex items-center space-x-2 text-gray-500">
+            <li>
+              <Link href="/" className="hover:text-pink-600 transition-colors">
+                Beranda
+              </Link>
+            </li>
+            <li>/</li>
+            <li className="text-gray-900">Keranjang Belanja</li>
+          </ol>
+        </nav>
+
+        {/* Page Header */}
+        <div className="mb-6 sm:mb-8">
+          <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-2">Keranjang Belanja</h1>
+          <p className="text-sm text-gray-600">
+            {items.length > 0 ? `${items.length} item dalam keranjang Anda` : "Keranjang Anda kosong"}
+          </p>
+        </div>
 
         {items.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-lg shadow-sm">
-            <h2 className="text-2xl font-semibold mb-4">Keranjang Anda kosong</h2>
-            <p className="mb-6 text-gray-500">Sepertinya Anda belum menambahkan item apa pun ke keranjang Anda.</p>
-            <Link href="/products" className="filled-button">
-              Mulai Belanja
-            </Link>
+          <div className="text-center py-12 sm:py-16 bg-white rounded-xl shadow-lg">
+            <div className="max-w-md mx-auto">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                <svg
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-gray-400"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+                  />
+                </svg>
+              </div>
+              <h2 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3">Keranjang Anda Kosong</h2>
+              <p className="text-sm text-gray-600 mb-6 sm:mb-8 leading-relaxed">
+                Sepertinya Anda belum menambahkan item apa pun ke keranjang Anda. Mari mulai berbelanja!
+              </p>
+              <Link
+                href="/products"
+                className="inline-flex items-center bg-pink-600 text-white px-6 py-3 rounded-lg text-sm font-medium hover:bg-pink-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl"
+              >
+                Mulai Belanja
+              </Link>
+            </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
+            {/* Cart Items */}
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-                <div className="p-4 border-b">
-                  <h2 className="text-xl font-semibold">Item Keranjang ({items.length})</h2>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div className="p-4 sm:p-6 border-b border-gray-200">
+                  <h2 className="text-lg font-semibold text-gray-900">Item Keranjang ({items.length})</h2>
                 </div>
 
-                <div className="divide-y">
+                <div className="divide-y divide-gray-200">
                   {items.map((item) => (
-                    <div key={item.id} className="p-4 flex flex-col sm:flex-row">
-                      <div className="relative h-28 w-28 flex-shrink-0 mb-4 sm:mb-0 overflow-hidden rounded-md">
-                        <Image
-                          src={item.image || "/placeholder.svg"}
-                          alt={item.title}
-                          fill
-                          className="object-cover transition-transform duration-500 hover:scale-110"
-                        />
-                      </div>
-
-                      <div className="flex-1 sm:ml-6">
-                        <div className="flex justify-between">
-                          <h3 className="font-semibold">{item.title}</h3>
-                          <button
-                            onClick={() => removeItem(item.id)}
-                            className="text-gray-400 hover:text-red-600 transition-colors"
-                          >
-                            <X size={18} />
-                          </button>
+                    <div key={item.id} className="p-4 sm:p-6">
+                      <div className="flex flex-col sm:flex-row gap-4">
+                        {/* Product Image */}
+                        <div className="relative h-20 w-20 sm:h-24 sm:w-24 flex-shrink-0 overflow-hidden rounded-lg group">
+                          <Image
+                            src={item.image || "/placeholder.svg"}
+                            alt={item.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                          />
                         </div>
 
-                        <div className="text-gray-500 text-sm mt-1">
-                          {item.size && item.color && (
-                            <>
-                              Ukuran: {item.size} | Warna: {item.color}
-                            </>
-                          )}
-                        </div>
-
-                        <div className="mt-4 flex justify-between items-center">
-                          <div className="flex items-center border rounded-md">
+                        {/* Product Details */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex justify-between items-start mb-2">
+                            <h3 className="text-base font-semibold text-gray-900 truncate pr-4">{item.title}</h3>
                             <button
-                              onClick={() => decrementQuantity(item.id)}
-                              className="px-3 py-1 hover:bg-gray-100 transition-colors"
-                              disabled={item.quantity <= 1}
+                              onClick={() => removeItem(item.id)}
+                              className="text-gray-400 hover:text-red-600 transition-colors duration-300 p-1"
+                              aria-label="Hapus item"
                             >
-                              <Minus size={16} />
-                            </button>
-                            <span className="px-3">{item.quantity}</span>
-                            <button
-                              onClick={() => incrementQuantity(item.id)}
-                              className="px-3 py-1 hover:bg-gray-100 transition-colors"
-                            >
-                              <Plus size={16} />
+                              <X className="w-4 h-4" />
                             </button>
                           </div>
 
-                          <div className="font-semibold text-lg">{formatPrice(item.price * item.quantity)}</div>
+                          {/* Product Options */}
+                          <div className="text-sm text-gray-600 mb-3">
+                            {item.size && item.color && (
+                              <div className="flex flex-wrap gap-4">
+                                <span>
+                                  Ukuran: <span className="font-medium">{item.size}</span>
+                                </span>
+                                <span>
+                                  Warna: <span className="font-medium">{item.color}</span>
+                                </span>
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Price and Quantity */}
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                            {/* Quantity Controls */}
+                            <div className="flex items-center">
+                              <span className="text-sm text-gray-600 mr-3">Jumlah:</span>
+                              <div className="flex items-center border border-gray-300 rounded-lg">
+                                <button
+                                  onClick={() => decrementQuantity(item.id)}
+                                  className="p-2 hover:bg-gray-100 transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                                  disabled={item.quantity <= 1}
+                                  aria-label="Kurangi jumlah"
+                                >
+                                  <Minus className="w-3 h-3" />
+                                </button>
+                                <span className="px-3 py-2 text-sm font-medium min-w-[3rem] text-center">
+                                  {item.quantity}
+                                </span>
+                                <button
+                                  onClick={() => incrementQuantity(item.id)}
+                                  className="p-2 hover:bg-gray-100 transition-colors duration-300"
+                                  aria-label="Tambah jumlah"
+                                >
+                                  <Plus className="w-3 h-3" />
+                                </button>
+                              </div>
+                            </div>
+
+                            {/* Price */}
+                            <div className="text-right">
+                              <div className="text-base font-bold text-pink-600">
+                                {formatPrice(item.price * item.quantity)}
+                              </div>
+                              {item.quantity > 1 && (
+                                <div className="text-sm text-gray-500">
+                                  {formatPrice(item.price)} × {item.quantity}
+                                </div>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   ))}
                 </div>
 
-                <div className="p-4 border-t">
+                {/* Continue Shopping */}
+                <div className="p-4 sm:p-6 border-t border-gray-200 bg-gray-50">
                   <Link
                     href="/products"
-                    className="text-pink-600 hover:text-pink-700 inline-flex items-center transition-colors"
+                    className="text-pink-600 hover:text-pink-700 inline-flex items-center text-sm font-medium transition-colors duration-300"
                   >
-                    <ArrowLeft size={16} className="mr-2" /> Lanjutkan Belanja
+                    <ArrowLeft className="w-4 h-4 mr-2" />
+                    Lanjutkan Belanja
                   </Link>
                 </div>
               </div>
             </div>
 
+            {/* Order Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-                <div className="p-4 border-b">
-                  <h2 className="text-xl font-semibold">Ringkasan Pesanan</h2>
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden sticky top-4">
+                <div className="p-4 sm:p-6 border-b border-gray-200">
+                  <h2 className="text-lg font-semibold text-gray-900">Ringkasan Pesanan</h2>
                 </div>
 
-                <div className="p-4 space-y-4">
-                  <div className="flex justify-between">
-                    <span>Subtotal</span>
-                    <span>{formatPrice(subtotal)}</span>
+                <div className="p-4 sm:p-6 space-y-4">
+                  {/* Subtotal */}
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">Subtotal ({items.length} item)</span>
+                    <span className="text-sm font-medium text-gray-900">{formatPrice(subtotal)}</span>
                   </div>
 
-                  <div className="flex justify-between">
-                    <span>Pengiriman</span>
-                    <span>{formatPrice(shipping)}</span>
+                  {/* Shipping */}
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm text-gray-700">Pengiriman</span>
+                    <span className="text-sm font-medium text-gray-900">{formatPrice(shipping)}</span>
                   </div>
 
-                  <div className="pt-4 border-t flex justify-between font-semibold text-lg">
-                    <span>Total</span>
-                    <span>{formatPrice(total)}</span>
+                  {/* Shipping Info */}
+                  <div className="text-xs text-gray-500 bg-blue-50 p-3 rounded-lg">
+                    💡 <strong>Gratis ongkir</strong> untuk pembelian minimal Rp 300.000
                   </div>
 
+                  {/* Total */}
+                  <div className="pt-4 border-t border-gray-200">
+                    <div className="flex justify-between items-center">
+                      <span className="text-base font-semibold text-gray-900">Total</span>
+                      <span className="text-lg font-bold text-pink-600">{formatPrice(total)}</span>
+                    </div>
+                  </div>
+
+                  {/* Checkout Button */}
                   <Link
                     href="/payment"
-                    className="filled-button w-full flex items-center justify-center mt-6 transition-transform hover:scale-105"
+                    className="w-full bg-pink-600 text-white py-3 rounded-lg text-sm font-medium hover:bg-pink-700 transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl flex items-center justify-center mt-6"
                   >
-                    <CreditCard size={18} className="mr-2" /> Checkout
+                    <CreditCard className="w-4 h-4 mr-2" />
+                    Checkout Sekarang
                   </Link>
+
+                  {/* Security Info */}
+                  <div className="text-center text-xs text-gray-500 mt-4">🔒 Pembayaran aman dan terenkripsi</div>
                 </div>
 
-                <div className="p-4 bg-gray-50">
-                  <h3 className="font-semibold mb-2">Kami Menerima</h3>
-                  <div className="flex space-x-2">
-                    <div className="bg-gray-200 h-8 w-12 rounded"></div>
-                    <div className="bg-gray-200 h-8 w-12 rounded"></div>
-                    <div className="bg-gray-200 h-8 w-12 rounded"></div>
-                    <div className="bg-gray-200 h-8 w-12 rounded"></div>
+                {/* Payment Methods */}
+                <div className="p-4 sm:p-6 bg-gray-50 border-t border-gray-200">
+                  <h3 className="text-sm font-semibold text-gray-900 mb-3">Kami Menerima</h3>
+                  <div className="grid grid-cols-4 gap-2">
+                    {[1, 2, 3, 4].map((i) => (
+                      <div
+                        key={i}
+                        className="bg-white border border-gray-200 rounded-lg h-8 flex items-center justify-center"
+                      >
+                        <div className="w-6 h-4 bg-gray-300 rounded"></div>
+                      </div>
+                    ))}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-2">Kartu Kredit, Transfer Bank, E-Wallet, dan lainnya</p>
+                </div>
+              </div>
+
+              {/* Promo Code */}
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden mt-6">
+                <div className="p-4 sm:p-6">
+                  <h3 className="text-base font-semibold text-gray-900 mb-3">Kode Promo</h3>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="Masukkan kode promo"
+                      className="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                    />
+                    <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors">
+                      Terapkan
+                    </button>
                   </div>
                 </div>
               </div>

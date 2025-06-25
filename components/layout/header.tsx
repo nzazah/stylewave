@@ -48,7 +48,7 @@ export default function Header() {
           <SheetContent side="left" className="w-[280px] sm:w-[320px]">
             <div className="flex items-center justify-between mb-6">
               <Link href="/" className="flex items-center gap-2 group" onClick={() => setIsMobileMenuOpen(false)}>
-                <span className="font-bold text-lg transition-transform duration-200 group-hover:scale-105">
+                <span className="font-bold text-base transition-transform duration-200 group-hover:scale-105">
                   Style<span className="text-pink-600">Wave</span>
                 </span>
               </Link>
@@ -68,7 +68,7 @@ export default function Header() {
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={cn(
-                    "text-base font-medium py-2.5 px-3 rounded-md transition-all duration-200 hover:bg-pink-50 hover:text-pink-600",
+                    "text-sm font-medium py-2.5 px-3 rounded-md transition-all duration-200 hover:bg-pink-50 hover:text-pink-600",
                     isActive(item.href) ? "text-pink-600 bg-pink-50" : "text-foreground",
                   )}
                 >
@@ -82,7 +82,7 @@ export default function Header() {
         {/* Logo */}
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-2 group">
-            <span className="font-bold text-lg md:text-xl transition-all duration-200 group-hover:scale-105">
+            <span className="font-bold text-base md:text-lg transition-all duration-200 group-hover:scale-105">
               Style<span className="text-pink-600 group-hover:text-pink-700 transition-colors duration-200">Wave</span>
             </span>
           </Link>
@@ -95,7 +95,7 @@ export default function Header() {
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm lg:text-base font-medium transition-all duration-200 hover:text-pink-600 relative group py-2",
+                "text-sm font-medium transition-all duration-200 hover:text-pink-600 relative group py-2",
                 isActive(item.href) ? "text-pink-600" : "text-foreground",
               )}
             >

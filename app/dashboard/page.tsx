@@ -65,33 +65,33 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="h-full flex flex-col p-6 overflow-auto animate-fade-in">
+    <div className="h-full flex flex-col p-4 sm:p-6 overflow-auto animate-fade-in">
       {/* Header Section */}
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-8 gap-4 animate-slide-up">
+      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-6 sm:mb-8 gap-3 sm:gap-4 animate-slide-up">
         <div>
-          <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">Dashboard</h1>
-          <p className="text-base text-gray-600 mt-1">Selamat datang kembali, Admin</p>
+          <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900">Dashboard</h1>
+          <p className="text-xs sm:text-sm text-gray-600 mt-1">Selamat datang kembali, Admin</p>
         </div>
-        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-3 w-3 sm:h-4 sm:w-4 text-gray-400" />
             <Input
               type="search"
               placeholder="Cari..."
-              className="w-full sm:w-[220px] pl-9 py-2.5 text-base border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"
+              className="w-full sm:w-[200px] lg:w-[220px] pl-8 sm:pl-9 py-2 sm:py-2.5 text-xs sm:text-sm border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 transition-all duration-300"
             />
           </div>
           <Button
             variant="outline"
-            className="gap-2 px-4 py-2.5 text-base border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+            className="gap-2 px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm border-gray-300 rounded-lg hover:bg-gray-50 transition-all duration-300 hover:scale-105"
           >
-            <Calendar className="h-4 w-4" /> Mei 2025 <ChevronDown className="h-4 w-4" />
+            <Calendar className="h-3 w-3 sm:h-4 sm:w-4" /> Mei 2025 <ChevronDown className="h-3 w-3 sm:h-4 sm:w-4" />
           </Button>
         </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-8">
+      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4 mb-6 sm:mb-8">
         {[
           {
             title: "Total Pendapatan",
@@ -138,26 +138,28 @@ export default function DashboardPage() {
               animationFillMode: "forwards",
             }}
           >
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
-              <CardTitle className="text-base font-semibold text-gray-700">{stat.title}</CardTitle>
-              <stat.icon className="h-5 w-5 text-gray-500" />
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 sm:pb-3">
+              <CardTitle className="text-xs sm:text-sm font-semibold text-gray-700 leading-tight">
+                {stat.title}
+              </CardTitle>
+              <stat.icon className="h-3 w-3 sm:h-4 sm:w-4 text-gray-500 flex-shrink-0" />
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl lg:text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
+            <CardContent className="pt-0">
+              <div className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 mb-1 sm:mb-2">{stat.value}</div>
               <div className="flex items-center">
                 <span
-                  className={`text-sm font-medium flex items-center ${
+                  className={`text-xs sm:text-sm font-medium flex items-center ${
                     stat.changeType === "positive" ? "text-green-600" : "text-red-600"
                   }`}
                 >
                   {stat.changeType === "positive" ? (
-                    <ArrowUpRight className="h-4 w-4 mr-1" />
+                    <ArrowUpRight className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                   ) : (
-                    <ArrowDownRight className="h-4 w-4 mr-1" />
+                    <ArrowDownRight className="h-3 w-3 sm:h-4 sm:w-4 mr-1" />
                   )}
                   {stat.change}
                 </span>
-                <span className="text-sm text-gray-500 ml-2">dari bulan lalu</span>
+                <span className="text-xs text-gray-500 ml-1 sm:ml-2 hidden sm:inline">dari bulan lalu</span>
               </div>
             </CardContent>
           </Card>
@@ -172,43 +174,45 @@ export default function DashboardPage() {
           animationFillMode: "forwards",
         }}
       >
-        <Tabs defaultValue="overview" className="space-y-6 h-full flex flex-col">
-          <TabsList className="grid w-full max-w-md grid-cols-3">
-            <TabsTrigger value="overview" className="text-base font-medium">
+        <Tabs defaultValue="overview" className="space-y-4 sm:space-y-6 h-full flex flex-col">
+          <TabsList className="grid w-full max-w-xs sm:max-w-md grid-cols-3">
+            <TabsTrigger value="overview" className="text-xs sm:text-sm font-medium">
               Ikhtisar
             </TabsTrigger>
-            <TabsTrigger value="analytics" className="text-base font-medium">
+            <TabsTrigger value="analytics" className="text-xs sm:text-sm font-medium">
               Analitik
             </TabsTrigger>
-            <TabsTrigger value="reports" className="text-base font-medium">
+            <TabsTrigger value="reports" className="text-xs sm:text-sm font-medium">
               Laporan
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="overview" className="space-y-6 flex-1">
+          <TabsContent value="overview" className="space-y-4 sm:space-y-6 flex-1">
             {/* Charts Section */}
-            <div className="grid gap-6 lg:grid-cols-7">
+            <div className="grid gap-4 sm:gap-6 lg:grid-cols-7">
               <Card className="lg:col-span-4 hover:shadow-lg transition-all duration-300">
-                <CardHeader className="flex flex-row items-center justify-between">
+                <CardHeader className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0">
                   <div>
-                    <CardTitle className="text-xl font-bold text-gray-900">Penjualan Bulanan</CardTitle>
-                    <CardDescription className="text-base text-gray-600 mt-1">
+                    <CardTitle className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">
+                      Penjualan Bulanan
+                    </CardTitle>
+                    <CardDescription className="text-xs sm:text-sm text-gray-600 mt-1">
                       Tren penjualan selama 6 bulan terakhir
                     </CardDescription>
                   </div>
                   <Button
                     variant="outline"
                     size="sm"
-                    className="text-base hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+                    className="text-xs sm:text-sm hover:bg-gray-50 transition-all duration-300 hover:scale-105"
                   >
                     Lihat Detail
                   </Button>
                 </CardHeader>
                 <CardContent>
-                  <div className="h-[300px] flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors duration-300">
+                  <div className="h-[200px] sm:h-[250px] lg:h-[300px] flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-gray-200 hover:border-gray-300 transition-colors duration-300">
                     <div className="text-center">
-                      <BarChart3 className="h-16 w-16 text-gray-400 mx-auto mb-3" />
-                      <p className="text-base text-gray-500">Grafik penjualan akan ditampilkan di sini</p>
+                      <BarChart3 className="h-12 w-12 sm:h-16 sm:w-16 text-gray-400 mx-auto mb-2 sm:mb-3" />
+                      <p className="text-xs sm:text-sm text-gray-500">Grafik penjualan akan ditampilkan di sini</p>
                     </div>
                   </div>
                 </CardContent>
@@ -216,13 +220,15 @@ export default function DashboardPage() {
 
               <Card className="lg:col-span-3 hover:shadow-lg transition-all duration-300">
                 <CardHeader>
-                  <CardTitle className="text-xl font-bold text-gray-900">Produk Terlaris</CardTitle>
-                  <CardDescription className="text-base text-gray-600">
+                  <CardTitle className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">
+                    Produk Terlaris
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm text-gray-600">
                     Top 5 produk berdasarkan penjualan
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-6">
+                  <div className="space-y-4 sm:space-y-6">
                     {[
                       { name: "Hoodie Urban Vibes", sales: 124, percentage: 28 },
                       { name: "Kaos Street Style", sales: 98, percentage: 22 },
@@ -234,21 +240,21 @@ export default function DashboardPage() {
                         key={i}
                         className="flex items-center group hover:bg-gray-50 p-2 rounded-lg transition-all duration-300"
                       >
-                        <div className="w-8 text-base font-semibold text-gray-700">{i + 1}.</div>
-                        <div className="flex-1 ml-3">
-                          <div className="text-base font-semibold text-gray-900 group-hover:text-pink-600 transition-colors duration-300">
+                        <div className="w-6 sm:w-8 text-xs sm:text-sm font-semibold text-gray-700">{i + 1}.</div>
+                        <div className="flex-1 ml-2 sm:ml-3">
+                          <div className="text-xs sm:text-sm font-semibold text-gray-900 group-hover:text-pink-600 transition-colors duration-300 leading-tight">
                             {product.name}
                           </div>
-                          <div className="w-full h-2.5 bg-gray-200 rounded-full mt-2">
+                          <div className="w-full h-2 sm:h-2.5 bg-gray-200 rounded-full mt-1 sm:mt-2">
                             <div
-                              className="h-2.5 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full transition-all duration-500 ease-out"
+                              className="h-2 sm:h-2.5 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full transition-all duration-500 ease-out"
                               style={{ width: `${product.percentage}%` }}
                             ></div>
                           </div>
                         </div>
-                        <div className="ml-4 text-right">
-                          <div className="text-base font-bold text-gray-900">{product.sales}</div>
-                          <div className="text-sm text-gray-500">terjual</div>
+                        <div className="ml-3 sm:ml-4 text-right">
+                          <div className="text-xs sm:text-sm font-bold text-gray-900">{product.sales}</div>
+                          <div className="text-xs text-gray-500">terjual</div>
                         </div>
                       </div>
                     ))}
@@ -258,35 +264,39 @@ export default function DashboardPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full text-base hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+                    className="w-full text-xs sm:text-sm hover:bg-gray-50 transition-all duration-300 hover:scale-105"
                   >
-                    <Eye className="mr-2 h-4 w-4" /> Lihat Semua Produk
+                    <Eye className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> Lihat Semua Produk
                   </Button>
                 </CardFooter>
               </Card>
             </div>
 
             {/* Bottom Cards Section */}
-            <div className="grid gap-6 lg:grid-cols-3">
+            <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
               {/* Recent Orders */}
               <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <CardTitle className="text-xl font-bold text-gray-900">Pesanan Terbaru</CardTitle>
-                  <CardDescription className="text-base text-gray-600">Pesanan yang baru masuk</CardDescription>
+                  <CardTitle className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">
+                    Pesanan Terbaru
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm text-gray-600">
+                    Pesanan yang baru masuk
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {recentOrders.map((order, index) => (
                       <div
                         key={order.id}
-                        className="flex items-center justify-between border-b border-gray-100 pb-4 last:border-0 last:pb-0 hover:bg-gray-50 p-2 rounded-lg transition-all duration-300"
+                        className="flex items-center justify-between border-b border-gray-100 pb-3 sm:pb-4 last:border-0 last:pb-0 hover:bg-gray-50 p-2 rounded-lg transition-all duration-300"
                       >
-                        <div>
-                          <div className="text-base font-semibold text-gray-900">{order.id}</div>
-                          <div className="text-sm text-gray-600">{order.customer}</div>
+                        <div className="min-w-0 flex-1">
+                          <div className="text-xs sm:text-sm font-semibold text-gray-900 truncate">{order.id}</div>
+                          <div className="text-xs text-gray-600 truncate">{order.customer}</div>
                         </div>
-                        <div className="text-right">
-                          <div className="text-base font-bold text-gray-900">{formatPrice(order.total)}</div>
+                        <div className="text-right ml-2">
+                          <div className="text-xs sm:text-sm font-bold text-gray-900">{formatPrice(order.total)}</div>
                           <Badge
                             variant={
                               order.status === "Selesai"
@@ -295,7 +305,7 @@ export default function DashboardPage() {
                                   ? "secondary"
                                   : "outline"
                             }
-                            className="mt-1 text-sm"
+                            className="mt-1 text-xs"
                           >
                             {order.status}
                           </Badge>
@@ -308,9 +318,9 @@ export default function DashboardPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full text-base hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+                    className="w-full text-xs sm:text-sm hover:bg-gray-50 transition-all duration-300 hover:scale-105"
                   >
-                    <ShoppingBag className="mr-2 h-4 w-4" /> Lihat Semua Pesanan
+                    <ShoppingBag className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> Lihat Semua Pesanan
                   </Button>
                 </CardFooter>
               </Card>
@@ -318,38 +328,42 @@ export default function DashboardPage() {
               {/* Recent Activities */}
               <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <CardTitle className="text-xl font-bold text-gray-900">Aktivitas Terbaru</CardTitle>
-                  <CardDescription className="text-base text-gray-600">Aktivitas sistem terbaru</CardDescription>
+                  <CardTitle className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">
+                    Aktivitas Terbaru
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm text-gray-600">
+                    Aktivitas sistem terbaru
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {[
                       {
                         action: "Pesanan baru dibuat",
                         detail: "ORD12345678 oleh Budi Santoso",
                         time: "10 menit yang lalu",
-                        icon: <ShoppingBag className="h-4 w-4" />,
+                        icon: <ShoppingBag className="h-3 w-3 sm:h-4 sm:w-4" />,
                         color: "bg-blue-100 text-blue-600",
                       },
                       {
                         action: "Produk ditambahkan",
                         detail: "Kemeja Formal Slim oleh Admin",
                         time: "1 jam yang lalu",
-                        icon: <Plus className="h-4 w-4" />,
+                        icon: <Plus className="h-3 w-3 sm:h-4 sm:w-4" />,
                         color: "bg-green-100 text-green-600",
                       },
                       {
                         action: "Stok menipis",
                         detail: "Sneakers Wave Rider (3 tersisa)",
                         time: "3 jam yang lalu",
-                        icon: <AlertCircle className="h-4 w-4" />,
+                        icon: <AlertCircle className="h-3 w-3 sm:h-4 sm:w-4" />,
                         color: "bg-amber-100 text-amber-600",
                       },
                       {
                         action: "Pesanan selesai",
                         detail: "ORD12345675 oleh Maya Sari",
                         time: "5 jam yang lalu",
-                        icon: <CheckCircle className="h-4 w-4" />,
+                        icon: <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4" />,
                         color: "bg-green-100 text-green-600",
                       },
                     ].map((activity, i) => (
@@ -358,15 +372,17 @@ export default function DashboardPage() {
                         className="flex items-start hover:bg-gray-50 p-2 rounded-lg transition-all duration-300 group"
                       >
                         <div
-                          className={`${activity.color} p-2 rounded-full mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-300`}
+                          className={`${activity.color} p-1.5 sm:p-2 rounded-full mr-2 sm:mr-3 mt-0.5 group-hover:scale-110 transition-transform duration-300 flex-shrink-0`}
                         >
                           {activity.icon}
                         </div>
-                        <div className="flex-1">
-                          <div className="text-base font-semibold text-gray-900">{activity.action}</div>
-                          <div className="text-sm text-gray-600">{activity.detail}</div>
-                          <div className="text-sm text-gray-500 mt-1 flex items-center">
-                            <Clock className="h-3 w-3 mr-1" /> {activity.time}
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs sm:text-sm font-semibold text-gray-900 leading-tight">
+                            {activity.action}
+                          </div>
+                          <div className="text-xs text-gray-600 truncate">{activity.detail}</div>
+                          <div className="text-xs text-gray-500 mt-1 flex items-center">
+                            <Clock className="h-2 w-2 sm:h-3 sm:w-3 mr-1 flex-shrink-0" /> {activity.time}
                           </div>
                         </div>
                       </div>
@@ -377,7 +393,7 @@ export default function DashboardPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full text-base hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+                    className="w-full text-xs sm:text-sm hover:bg-gray-50 transition-all duration-300 hover:scale-105"
                   >
                     Lihat Semua Aktivitas
                   </Button>
@@ -387,13 +403,15 @@ export default function DashboardPage() {
               {/* Top Customers */}
               <Card className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                 <CardHeader>
-                  <CardTitle className="text-xl font-bold text-gray-900">Pelanggan Aktif</CardTitle>
-                  <CardDescription className="text-base text-gray-600">
+                  <CardTitle className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">
+                    Pelanggan Aktif
+                  </CardTitle>
+                  <CardDescription className="text-xs sm:text-sm text-gray-600">
                     Pelanggan dengan transaksi terbanyak
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-4">
+                  <div className="space-y-3 sm:space-y-4">
                     {[
                       { name: "Budi Santoso", email: "budi.s@example.com", orders: 12, spent: "Rp 5.250.000" },
                       { name: "Siti Rahayu", email: "siti.r@example.com", orders: 8, spent: "Rp 3.750.000" },
@@ -404,21 +422,21 @@ export default function DashboardPage() {
                         key={i}
                         className="flex items-center hover:bg-gray-50 p-2 rounded-lg transition-all duration-300 group"
                       >
-                        <Avatar className="h-10 w-10 mr-3 group-hover:scale-110 transition-transform duration-300">
+                        <Avatar className="h-8 w-8 sm:h-10 sm:w-10 mr-2 sm:mr-3 group-hover:scale-110 transition-transform duration-300 flex-shrink-0">
                           <AvatarImage src={`/placeholder.svg?height=40&width=40&text=${customer.name.charAt(0)}`} />
-                          <AvatarFallback className="bg-pink-100 text-pink-600 font-semibold">
+                          <AvatarFallback className="bg-pink-100 text-pink-600 font-semibold text-xs sm:text-sm">
                             {customer.name.charAt(0)}
                           </AvatarFallback>
                         </Avatar>
-                        <div className="flex-1">
-                          <div className="text-base font-semibold text-gray-900 group-hover:text-pink-600 transition-colors duration-300">
+                        <div className="flex-1 min-w-0">
+                          <div className="text-xs sm:text-sm font-semibold text-gray-900 group-hover:text-pink-600 transition-colors duration-300 truncate">
                             {customer.name}
                           </div>
-                          <div className="text-sm text-gray-600">{customer.email}</div>
+                          <div className="text-xs text-gray-600 truncate">{customer.email}</div>
                         </div>
-                        <div className="text-right">
-                          <div className="text-base font-bold text-gray-900">{customer.orders} pesanan</div>
-                          <div className="text-sm text-gray-600">{customer.spent}</div>
+                        <div className="text-right ml-2">
+                          <div className="text-xs sm:text-sm font-bold text-gray-900">{customer.orders} pesanan</div>
+                          <div className="text-xs text-gray-600">{customer.spent}</div>
                         </div>
                       </div>
                     ))}
@@ -428,9 +446,9 @@ export default function DashboardPage() {
                   <Button
                     variant="outline"
                     size="sm"
-                    className="w-full text-base hover:bg-gray-50 transition-all duration-300 hover:scale-105"
+                    className="w-full text-xs sm:text-sm hover:bg-gray-50 transition-all duration-300 hover:scale-105"
                   >
-                    <Users className="mr-2 h-4 w-4" /> Lihat Semua Pelanggan
+                    <Users className="mr-2 h-3 w-3 sm:h-4 sm:w-4" /> Lihat Semua Pelanggan
                   </Button>
                 </CardFooter>
               </Card>
@@ -440,15 +458,15 @@ export default function DashboardPage() {
           <TabsContent value="analytics" className="flex-1">
             <Card className="h-full hover:shadow-lg transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-xl font-bold text-gray-900">Analitik</CardTitle>
-                <CardDescription className="text-base text-gray-600">
+                <CardTitle className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">Analitik</CardTitle>
+                <CardDescription className="text-xs sm:text-sm text-gray-600">
                   Lihat data analitik lengkap untuk bisnis Anda.
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex-1 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
                 <div className="text-center">
-                  <BarChart3 className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                  <p className="text-base text-gray-500">Data analitik akan ditampilkan di sini</p>
+                  <BarChart3 className="h-12 w-12 sm:h-16 sm:w-16 text-gray-400 mx-auto mb-3 sm:mb-4" />
+                  <p className="text-xs sm:text-sm text-gray-500">Data analitik akan ditampilkan di sini</p>
                 </div>
               </CardContent>
             </Card>
@@ -457,15 +475,15 @@ export default function DashboardPage() {
           <TabsContent value="reports" className="flex-1">
             <Card className="h-full hover:shadow-lg transition-all duration-300">
               <CardHeader>
-                <CardTitle className="text-xl font-bold text-gray-900">Laporan</CardTitle>
-                <CardDescription className="text-base text-gray-600">
+                <CardTitle className="text-sm sm:text-base lg:text-lg font-bold text-gray-900">Laporan</CardTitle>
+                <CardDescription className="text-xs sm:text-sm text-gray-600">
                   Buat dan unduh laporan untuk bisnis Anda.
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex-1 flex items-center justify-center bg-gray-50 rounded-lg border-2 border-dashed border-gray-200">
                 <div className="text-center">
-                  <FileText className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-                  <p className="text-base text-gray-500">Laporan akan ditampilkan di sini</p>
+                  <FileText className="h-12 w-12 sm:h-16 sm:w-16 text-gray-400 mx-auto mb-3 sm:mb-4" />
+                  <p className="text-xs sm:text-sm text-gray-500">Laporan akan ditampilkan di sini</p>
                 </div>
               </CardContent>
             </Card>

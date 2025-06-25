@@ -4,9 +4,9 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ChevronLeft, ChevronRight } from "lucide-react"
-import slider1 from "@/assets/slider1.jpg";
-import slider2 from "@/assets/slider2.jpg";
-import slider3 from "@/assets/slider3.jpg";
+import slider1 from "@/assets/slider1.jpg"
+import slider2 from "@/assets/slider2.jpg"
+import slider3 from "@/assets/slider3.jpg"
 
 // Banner data
 const banners = [
@@ -88,18 +88,18 @@ export default function BannerSlider() {
             <div className={`absolute inset-0 bg-gradient-to-r ${banner.color} opacity-60`}></div>
             <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-12 md:px-16 lg:px-24">
               <div className="max-w-xl text-white">
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 sm:mb-4 animate-slide-up">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-4 animate-slide-up">
                   {banner.title}
                 </h2>
                 <p
-                  className="text-sm sm:text-base md:text-lg mb-4 sm:mb-6 md:mb-8 opacity-90 animate-slide-up"
+                  className="text-xs sm:text-sm md:text-base mb-4 sm:mb-6 md:mb-8 opacity-90 animate-slide-up"
                   style={{ animationDelay: "0.2s" }}
                 >
                   {banner.subtitle}
                 </p>
                 <Link
                   href={banner.link}
-                  className="inline-block bg-white text-gray-900 px-6 py-3 rounded-lg font-medium text-sm sm:text-base hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl animate-slide-up"
+                  className="inline-block bg-white text-gray-900 px-6 py-3 rounded-lg font-medium text-xs sm:text-sm hover:bg-gray-100 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl animate-slide-up"
                   style={{ animationDelay: "0.4s" }}
                 >
                   {banner.cta}
@@ -116,14 +116,14 @@ export default function BannerSlider() {
         className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/30 backdrop-blur-sm text-white p-2 rounded-full hover:bg-white/50 transition-all duration-300 z-10"
         aria-label="Previous slide"
       >
-        <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+        <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
       <button
         onClick={nextSlide}
         className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/30 backdrop-blur-sm text-white p-2 rounded-full hover:bg-white/50 transition-all duration-300 z-10"
         aria-label="Next slide"
       >
-        <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+        <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5" />
       </button>
 
       {/* Indicators */}
