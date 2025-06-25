@@ -14,7 +14,7 @@ export default function AccountPage() {
     name: "Nur Azizah Fitria",
     email: "zazahlibrary@gmail.com",
     phone: "+62 895 3350 12442",
-    address: "Jl. Merdeka No. 123, Jakarta Selatan, 12345",
+    address: "Jl. Raya Miru no 19, Driyorejo - Gresik, Jawa Timur 61177, Indonesia",
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

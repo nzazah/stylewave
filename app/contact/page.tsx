@@ -37,7 +37,7 @@ export default function ContactPage() {
       icon: Phone,
       title: "Telepon",
       items: [
-        { label: "Layanan Pelanggan:", value: "+62 812 3456 7890" },
+        { label: "Layanan Pelanggan:", value: "+62 895 3350 12442" },
         { label: "Kantor Pusat:", value: "+62 21 1234 5678" },
       ],
     },
@@ -53,8 +53,8 @@ export default function ContactPage() {
       icon: MapPin,
       title: "Alamat",
       items: [
-        { label: "Kantor Pusat:", value: "Jl. Fashion Boulevard No. 123" },
-        { label: "", value: "Jakarta Selatan, 12345" },
+        { label: "Kantor Pusat:", value: "Jl. Raya Miru no 19, Driyorejo" },
+        { label: "", value: "Gresik, Jawa Timur 61177" },
         { label: "", value: "Indonesia" },
       ],
     },

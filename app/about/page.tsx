@@ -5,6 +5,7 @@ import own1 from "@/assets/own1.jpg";
 import own2 from "@/assets/own2.jpg";
 import own3 from "@/assets/own3.jpg";
 import own4 from "@/assets/own4.jpg";
+import logo from "@/assets/logo.jpg";
 
 export default function AboutPage() {
   const values = [
@@ -123,7 +124,7 @@ export default function AboutPage() {
                 tentang ekspresi diri dan kepercayaan diri.
               </p>
               <p className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed">
-                Dimulai dari toko kecil di Jakarta, StyleWave telah berkembang menjadi platform e-commerce fashion
+                Dimulai dari toko kecil di Gresik, StyleWave telah berkembang menjadi platform e-commerce fashion
                 terkemuka dengan ribuan pelanggan setia di seluruh Indonesia. Kami terus berinovasi dan berkolaborasi
                 dengan desainer lokal untuk menghadirkan koleksi yang unik dan berkualitas.
               </p>
@@ -135,7 +136,7 @@ export default function AboutPage() {
           </div>
           <div className="relative h-64 sm:h-80 lg:h-96 xl:h-[500px] rounded-xl overflow-hidden shadow-lg group animate-slide-right">
             <Image
-              src="/placeholder.svg?height=800&width=600"
+              src= {logo}
               alt="Cerita StyleWave"
               fill
               className="object-cover transition-transform duration-700 group-hover:scale-110"

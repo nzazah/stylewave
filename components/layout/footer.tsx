@@ -98,11 +98,11 @@ export default function Footer({ className }: { className?: string }) {
             <ul className="space-y-3">
               <li className="flex items-start">
                 <MapPin className="mr-2 h-5 w-5 text-pink-500 shrink-0" />
-                <span className="text-gray-400">Jl. Fashion Boulevard No. 123, Jakarta Selatan, Indonesia</span>
+                <span className="text-gray-400">Jl. Raya Miru no 19, Driyorejo - Gresik, Jawa Timur 61177, Indonesia</span>
               </li>
               <li className="flex items-center">
                 <Phone className="mr-2 h-5 w-5 text-pink-500" />
-                <span className="text-gray-400">+62 812 3456 7890</span>
+                <span className="text-gray-400">+62 895 3350 12442</span>
               </li>
               <li className="flex items-center">
                 <Mail className="mr-2 h-5 w-5 text-pink-500" />

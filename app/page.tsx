@@ -6,6 +6,7 @@ import ProductCard from "@/components/product-card"
 import main1 from "@/assets/main1.jpg";
 import main2 from "@/assets/main2.jpg";
 import main3 from "@/assets/main3.jpg";
+import logo from "@/assets/logo.jpg";
 
 // Sample product data
 const featuredProducts = [
@@ -118,7 +119,7 @@ export default function Home() {
             <div className="animate-slide-right">
               <div className="relative h-64 sm:h-80 lg:h-96 w-full group">
                 <Image
-                  src="/placeholder.svg?height=500&width=500"
+                  src= {logo}
                   alt="Features image"
                   fill
                   className="object-cover rounded-lg shadow-lg group-hover:shadow-2xl transition-all duration-500 group-hover:scale-105"
